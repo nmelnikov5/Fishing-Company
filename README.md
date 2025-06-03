@@ -1,83 +1,83 @@
-# Fishing Company Database Management System
+# Система управления базой данных рыболовной компании
 
-A full-stack web application for managing a fishing company's fleet, crew, and catch data.
+Полноценное веб-приложение для управления флотом рыболовной компании, экипажем и данными о улове.
 
-## Features
+## Возможности
 
-- Fleet management (boats, crew, fishing trips)
-- Catch tracking and reporting
-- Fishing bank management
-- Crew management
-- Detailed reporting and analytics
+- Управление флотом (суда, экипаж, рыболовные рейсы)
+- Отслеживание и отчетность по улову
+- Управление рыболовными банками
+- Управление экипажем
+- Подробная отчетность и аналитика
 
-## Tech Stack
+## Стек технологий
 
-- Frontend: React.js with TypeScript
-- Backend: Node.js with Express
-- Database: PostgreSQL
+- Фронтенд: React.js с TypeScript
+- Бэкенд: Node.js с Express
+- База данных: PostgreSQL
 - ORM: Prisma
 
-## Project Structure
+## Структура проекта
 
 ```
 fishing-company/
-├── client/             # React frontend
-├── server/             # Node.js backend
-└── database/           # Database migrations and schema
+├── client/             # Фронтенд на React
+├── server/             # Бэкенд на Node.js
+└── database/           # Миграции и схема базы данных
 ```
 
-## Setup Instructions
+## Инструкции по установке
 
-### Prerequisites
+### Предварительные требования
 
-- Node.js (v16 or higher)
+- Node.js (v16 или выше)
 - PostgreSQL
-- npm or yarn
+- npm или yarn
 
-### Installation
+### Установка
 
-1. Clone the repository
-2. Install dependencies:
+1. Клонируйте репозиторий
+2. Установите зависимости:
    ```bash
-   # Install backend dependencies
+   # Установка зависимостей бэкенда
    cd server
    npm install
 
-   # Install frontend dependencies
+   # Установка зависимостей фронтенда
    cd ../client
    npm install
    ```
 
-3. Set up the database:
-   - Create a PostgreSQL database
-   - Update the database connection string in `server/.env`
-   - Run migrations:
+3. Настройка базы данных:
+   - Создайте базу данных PostgreSQL
+   - Обновите строку подключения к базе данных в `server/.env`
+   - Выполните миграции:
      ```bash
      cd server
      npx prisma migrate dev
      ```
 
-4. Start the development servers:
+4. Запустите сервера разработки:
    ```bash
-   # Start backend server
+   # Запуск сервера бэкенда
    cd server
    npm run dev
 
-   # Start frontend server
+   # Запуск сервера фронтенда
    cd ../client
    npm start
    ```
 
-## API Documentation
+## Документация API
 
-The API documentation will be available at `http://localhost:3000/api-docs` when the server is running.
+Документация API будет доступна по адресу `http://localhost:3000/api-docs` при запущенном сервере.
 
-## Database Schema
+## Схема базы данных
 
-The database includes the following main entities:
-- Boats
-- Crew Members
-- Fishing Trips
-- Fishing Banks
-- Fish Catches
-- Fish Types 
+База данных включает следующие основные сущности:
+- Суда (Boats)
+- Члены экипажа (Crew Members)
+- Рыболовные рейсы (Fishing Trips)
+- Рыболовные банки (Fishing Banks)
+- Улов рыбы (Fish Catches)
+- Виды рыбы (Fish Types) 
