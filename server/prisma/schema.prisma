@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Boat {
+  id            Int           @id @default(autoincrement())
+  name          String
+  type          String
+  displacement   Float
+  buildDate     DateTime
+  fishingTrips  FishingTrip[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model CrewMember {
+  id            Int           @id @default(autoincrement())
+  name          String
+  address       String
+  position      String
+  fishingTrips  FishingTrip[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model FishingTrip {
+  id            Int           @id @default(autoincrement())
+  boat          Boat          @relation(fields: [boatId], references: [id])
+  boatId        Int
+  crewMembers   CrewMember[]
+  departureDate DateTime
+  returnDate    DateTime
+  bankVisits    BankVisit[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model FishingBank {
+  id            Int           @id @default(autoincrement())
+  name          String
+  location      String
+  description   String?       // Опциональное поле описания
+  bankVisits    BankVisit[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model BankVisit {
+  id            Int           @id @default(autoincrement())
+  fishingTrip   FishingTrip   @relation(fields: [fishingTripId], references: [id])
+  fishingTripId Int
+  fishingBank   FishingBank   @relation(fields: [fishingBankId], references: [id])
+  fishingBankId Int
+  arrivalDate   DateTime
+  departureDate DateTime
+  fishCatches   FishCatch[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model FishType {
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  fishCatches   FishCatch[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model FishCatch {
+  id            Int           @id @default(autoincrement())
+  bankVisit     BankVisit     @relation(fields: [bankVisitId], references: [id])
+  bankVisitId   Int
+  fishType      FishType      @relation(fields: [fishTypeId], references: [id])
+  fishTypeId    Int
+  weight        Float
+  quality       String        // "excellent", "good", "poor"
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+} 
