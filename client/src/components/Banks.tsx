@@ -192,25 +192,32 @@ const Banks: React.FC = () => {
           </TableHead>
           <TableBody>
             {banks.map((bank) => (
-              <TableRow key={bank.id}>
-                <TableCell>
-                  <Button
-                    color="primary"
-                    onClick={() => handleDetailsOpen(bank)}
-                    sx={{ textTransform: 'none' }}
-                  >
-                    {bank.name}
-                  </Button>
-                </TableCell>
+              <TableRow 
+                key={bank.id}
+                onClick={() => handleDetailsOpen(bank)}
+                sx={{ 
+                  cursor: 'pointer',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)'
+                  }
+                }}
+              >
+                <TableCell>{bank.name}</TableCell>
                 <TableCell>{bank.location}</TableCell>
                 <TableCell>
                   {bank.bankVisits.length} посещений
                 </TableCell>
                 <TableCell>
-                  <IconButton onClick={() => handleOpen(bank)} color="primary">
+                  <IconButton onClick={(e) => {
+                    e.stopPropagation();
+                    handleOpen(bank);
+                  }} color="primary">
                     <EditIcon />
                   </IconButton>
-                  <IconButton onClick={() => handleDelete(bank.id)} color="error">
+                  <IconButton onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete(bank.id);
+                  }} color="error">
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
